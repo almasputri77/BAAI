@@ -1,6 +1,6 @@
 #
-# James
-# Print Hello World!
+# Almas
+# Print Hello Tunghai University!
 #
 
 # 1. Input
