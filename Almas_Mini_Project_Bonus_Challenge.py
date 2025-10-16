@@ -23,7 +23,7 @@ total_original = 0
 total_discount_amount = 0
 total_final = 0
 
-print("=== PRODUCT DISCOUNT CALCULATOR ===\n")
+print("===PRODUCT DISCOUNT CALCULATOR===\n")
 
 # 2.) Loop through products
 for product in products:
@@ -65,11 +65,38 @@ for product in products:
     print(f"Final Price: ${final_price:.2f}\n")         #\n = new line
 
 # 5.) Generate summary
-print("=== SUMMARY ===")
+print("===SUMMARY===")
 print(f"Total Products: {len(products)}")               #len = number of elements in a list (string)
 print(f"Total Original Price: ${total_original:.2f}")  
 print(f"Total Discount: ${total_discount_amount:.2f}")
 print(f"Total Final Price: ${total_final:.2f}")
+
+
+# BONUS CHALLENGES
+print("\n===BONUS CHALLENGES===\n")
+# Level 1
+print("Level 1\n")
+
+# 1) Find and display the product with the highest discount amount
+highest_discount_product = None
+
+if highest_discount_product is None or discount_amount > highest_discount_product["discount_amount"]:
+    highest_discount_product = {"name": name, "discount_amount": discount_amount, "final_price": final_price}
+
+print(f"Highest Discount Product: {highest_discount_product['name']} (${highest_discount_product['discount_amount']:.2f} off)")
+
+# 2) Calculate the average discount percentage across all products
+category_count = {}
+total_discount_percentage = 0
+
+if category not in category_count:
+    category_count[category] = 1
+else:
+    category_count[category] += 1
+
+average_discount_percentage = (total_discount_percentage / len(products)) * 100
+
+print(f"Average Discount Percentage: {average_discount_percentage:.2f}%")
 
 
 # 3. Output
