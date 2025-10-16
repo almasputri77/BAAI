@@ -79,25 +79,41 @@ print("Level 1\n")
 
 # 1) Find and display the product with the highest discount amount
 highest_discount_product = None
-
-if highest_discount_product is None or discount_amount > highest_discount_product["discount_amount"]:
-    highest_discount_product = {"name": name, "discount_amount": discount_amount, "final_price": final_price}
-
-print(f"Highest Discount Product: {highest_discount_product['name']} (${highest_discount_product['discount_amount']:.2f} off)")
-
-# 2) Calculate the average discount percentage across all products
-category_count = {}
 total_discount_percentage = 0
 
-if category not in category_count:
-    category_count[category] = 1
-else:
-    category_count[category] += 1
+for product in products:
+    price = product["price"]
+    category = product["category"]
 
+    # Tentukan discount rate
+    if category == "Electronics":
+        if price >= 1000:
+            discount_rate = 0.20
+        elif price >= 500:
+            discount_rate = 0.15
+        else:
+            discount_rate = 0.10
+    elif category == "Clothing":
+        if price >= 100:
+            discount_rate = 0.25
+        else:
+            discount_rate = 0.15
+    elif category == "Books":
+        discount_rate = 0.10
+    else:
+        discount_rate = 0.0
+
+    discount_amount = price * discount_rate
+    total_discount_percentage += discount_rate
+
+    if highest_discount_product is None or discount_amount > highest_discount_product["discount_amount"]:
+        highest_discount_product = {"name": product["name"], "discount_amount": discount_amount}
+
+print(f"Product with Highest Discount: {highest_discount_product['name']} (${highest_discount_product['discount_amount']:.2f})")
+
+# 2) Calculate the average discount percentage across all products
 average_discount_percentage = (total_discount_percentage / len(products)) * 100
-
 print(f"Average Discount Percentage: {average_discount_percentage:.2f}%")
-
 
 # 3. Output
 
