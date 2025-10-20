@@ -41,9 +41,7 @@ for i in range(len(df)):
 
     total_bonus += bonus
 
-    print(name,": Target", status, "| Sales: $", f"{sales:,.0f}", "| Bonus: $", f"{bonus:,.0f}")
+    print(f"{name}: Target {status} | Sales: ${sales:,.0f} | Bonus: ${bonus:,.0f}")
 
-print()
-print("Total Bonuses to Pay: $", f"{total_bonus:,.0f}")
-
-df.to_excel('sales_data_with_bonus.xlsx', index=False)
+print()                                                                              #enter       
+print(f"Total Bonuses to Pay: ${total_bonus:,.0f}")
