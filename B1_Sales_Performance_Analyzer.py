@@ -9,39 +9,38 @@ import pandas as pd
 
 # 1. Input
 df = pd.read_excel ('sales_data.xlsx') 
-status_list = []
 
 # 2. Process
-# Calculate if each employee met their target (Yes/No)          
-for i in range(len(df)):
-    if df.loc[i, 'Monthly_Sales'] >= df.loc[i, 'Sales_Target']:      #df.loc (row, column)
-        df.loc[i, 'Target_Status'] = 'MET'
+total_bonus = 0                                         #define base value
+report_lines = []
+
+# (Loop through each product)
+for index, row in df.iterrows():                        #df.iterrows()= loop through each row.
+    name = row['Employee_Name']
+    sales = row['Monthly_Sales']
+    target = row['Sales_Target']
+
+    # *Calculate if each employee met their target (Yes/No)
+    # *Calculate bonus: 10% of sales if target met, 5% if not met
+    if sales >= target:
+        target_status = "Target MET"
+        bonus = 0.10 * sales    # 10% bonus if met
     else:
-        df.loc[i, 'Target_Status'] = 'NOT MET'
-
-# Calculate bonus: 10% of sales if target met, 5% if not met
-for i in range(len(df)):
-    sales = df.loc[i, 'Monthly_Sales']
-    status = df.loc[i, 'Target_Status']
-    if status == 'MET':
-        df.loc[i, 'Bonus'] = sales * 0.10
-    else:
-        df.loc[i, 'Bonus'] = sales * 0.05
-
-# 3. Output
-print("SALES PERFORMANCE REPORT")
-print("=========================")
-
-total_bonus = 0
-for i in range(len(df)):
-    name = df.loc[i, 'Employee_Name']
-    sales = df.loc[i, 'Monthly_Sales']
-    status = df.loc[i, 'Target_Status']
-    bonus = df.loc[i, 'Bonus']
+        target_status = "Target NOT MET"
+        bonus = 0.05 * sales    # 5% bonus if not met
 
     total_bonus += bonus
 
-    print(f"{name}: Target {status} | Sales: ${sales:,.0f} | Bonus: ${bonus:,.0f}")
+    report_lines.append(f"{name}: {target_status} | Sales: ${sales:,.0f} | Bonus: ${bonus:,.0f}")
 
-print()                                                                              #enter       
-print(f"Total Bonuses to Pay: ${total_bonus:,.0f}")
+# 3. Output
+# -------------------------------------------------------------------
+print("SALES PERFORMANCE REPORT")
+print("=========================\n")
+
+# Print each employee's performance info
+for line in report_lines:
+    print(line)
+
+# Print total bonuses
+print(f"\nTotal Bonuses to Pay: ${total_bonus:,.0f}")
