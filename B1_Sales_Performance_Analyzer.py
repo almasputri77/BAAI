@@ -8,11 +8,11 @@
 import pandas as pd
 
 # 1. Input
-df = pd.read_excel ('sales_data.xlsx') 
+df = pd.read_excel ('sales_data.xlsx')                  # Load the Excel
 
 # 2. Process
-total_bonus = 0                                         #define base value
-report_lines = []
+total_bonus = 0                                         # Define base value
+report= []                                              # List to store each employee’s result line
 
 # (Loop through each product)
 for index, row in df.iterrows():                        #df.iterrows()= loop through each row.
@@ -29,17 +29,18 @@ for index, row in df.iterrows():                        #df.iterrows()= loop thr
         target_status = "Target NOT MET"
         bonus = 0.05 * sales    # 5% bonus if not met
 
+    # (Add to total)
     total_bonus += bonus
 
-    report_lines.append(f"{name}: {target_status} | Sales: ${sales:,.0f} | Bonus: ${bonus:,.0f}")
+    # (Save the formatted output)
+    report.append(f"{name}: {target_status} | Sales: ${sales:,.0f} | Bonus: ${bonus:,.0f}")
 
 # 3. Output
-# -------------------------------------------------------------------
 print("SALES PERFORMANCE REPORT")
 print("=========================\n")
 
 # Print each employee's performance info
-for line in report_lines:
+for line in report:
     print(line)
 
 # Print total bonuses

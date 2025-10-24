@@ -14,16 +14,16 @@ total_cost = 0                                          #define base value
 reorder_list = []          
 good_stock_list = []       
 
-# *Check if the current stock is below the minimum stock
-# *If yes, calculate reorder quantity (minimum stock - current stock + 10 safety buffer)
-# *Calculate total reorder cost
-
 # (Loop through each product)
 for index, row in df.iterrows():
     product_name = row['Product_Name']
     current_stock = row['Current_Stock']
     minimum_stock = row['Minimum_Stock']
     unit_price = row['Unit_Price']
+
+# *Check if the current stock is below the minimum stock
+# *If yes, calculate reorder quantity (minimum stock - current stock + 10 safety buffer)
+# *Calculate total reorder cost
 
     if current_stock < minimum_stock:
         reorder_quantity = (minimum_stock - current_stock) + 10
@@ -33,8 +33,7 @@ for index, row in df.iterrows():
 # (Save the reorder info in a list)
         reorder_list.append(f"{product_name}: Reorder {reorder_quantity} units | Cost: ${reorder_cost:,.0f}")  
     else:
-# (Save product names that are in good stock)
-        good_stock_list.append(product_name)
+        good_stock_list.append(product_name)                # (Save product names that are in good stock)
         
 
 # 3. Output
